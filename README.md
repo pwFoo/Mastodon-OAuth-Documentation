@@ -265,6 +265,9 @@ Mastodon does not supply an optional `error_uri` parameter.
 
 ### Example
 
+~~~
+curl -X POST -d "grant_type=authorization_code&code=AUTHORIZATION_CODE_HERE&redirect_uri=http%3A%2F%2Flocalhost%3A3000&client_id=YOUR_CLIENT_ID_HERE&client_secret=YOUR_CLIENT_SECRET_HERE" -Ss https://mastodon.social/oauth/token
+~~~
 
 # Refreshing an Access Token
 
