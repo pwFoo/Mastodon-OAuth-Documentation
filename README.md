@@ -96,7 +96,7 @@ Scopes are another one of those things left up to the server. Mastodon v2.2.0 ha
 * scopes are case-sensitive
 * order not relevant
 
-Mastodon does not provide default scopes
+Mastodon does not provide default scopes during registration.
 
 > Some resources require no authorization or scope. See Mastodon's API documentation
 
@@ -143,7 +143,7 @@ Your app must direct an external or internal web browser using the following url
 | `response_type` | YES         | `code` for Authorization Code grant type  |
 | `client_id`     | YES         | A string given to you during registration |
 | `redirect_uri`  | YES         | same as registration. For additional notes, see details below. |
-| `scope`         | YES         | same as registration. See registration for details. |
+| `scope`         | SOMETIMES   | defaults to `read` if omitted, otherwise use any or all values used during registration. See registration for details. |
 | `state`         | NO          | recommended if combatting CSRF is necessary. see 10.12 |
 
 parameters with no values are ignored. Unrecognized parameters are ignored. Parameters must not be included more than once.
