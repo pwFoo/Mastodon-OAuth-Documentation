@@ -177,7 +177,7 @@ If your request is granted, the server will either:
 
 ### Server Responded with Authorization Code
 
-OAuth requires the Authorization Code to expire. It recommends 10 minutes. 
+Authorization Code are required to expire. On Mastodon/Doorkeeper the default is 10 minutes (the amount OAuth 2 recommends). 
 
 Your app must not reuse one. Reusing an authorization code will cause the server to deny your request, but could also cause the server to revoke tokens previously issued using that authorization code.
 
@@ -275,7 +275,7 @@ curl -X POST -d "grant_type=authorization_code&code=AUTHORIZATION_CODE_HERE&redi
 
 # Refreshing an Access Token
 
-It appears Mastodon no longer uses a refresh token for apps authorized using the Authorization Code grant type.
+Access tokens do not expire; no refresh tokens are issued.
 
 # Accessing a Resource Using an Access Token
 
