@@ -186,7 +186,7 @@ If the user or server denied your request, or an error occurred, the web browser
 
 The value assigned to the error parameter may be one of the following
 
-| Error             |
+| Error Code        |
 |-------------------|
 | `invalid_request` |
 | `unauthorized_client` |
@@ -205,15 +205,15 @@ Use Mastodon's RESTful API to request an OAuth access token. The endpoint for to
 /oauth/token
 ~~~
 
-Your app must use POST
+Your app must use POST to send the following data
 
 | Field           | Required?   | Description             |
 |-----------------|-------------|-------------------------|
 | `grant_type`    | YES         | `authorization_code`    |
-| `code`          | YES         |   |
+| `code`          | YES         | used to supply the authorization code |
 | `redirect_uri`  | MAYBE       | same as registration. See registration for details. |
-| `client_id`     | YES         | same as registration. See registration for details. |
-| `client_secret` | YES         |  |
+| `client_id`     | YES         | obtained during registration. See registration for details. |
+| `client_secret` | YES         | obtained during registration. |
 
 parameters with no values are ignored. Unrecognized parameters are ignored. Parameters must not be included more than once.
 
@@ -223,10 +223,10 @@ The following parameters included in the body of the HTTP response using the app
 
 | Field          | Description |
 |----------------|-------------|
-| `access_token` |             |
-| `token_type`   |             |
+| `access_token` | a string of unspecified length used to request specific resources |
+| `token_type`   | 'bearer' or 'mac'. Always 'bearer' |
 | `scope`        | scope of the issued token. may differ from the one requested during authorization. optional if identical but always included in Mastodon |
-| `created_at`   |  app must ignore unknown value names in the response |           |
+| `created_at`   |  possibly an undocumented value. per the spec, an app must ignore unknown value names in the response |           |
 
 The following optional parameters are not included: `expires_in` and `refresh_token`. When `expires_in` is omitted the server should provide the expiration time via other means or document the default value.
 
@@ -234,16 +234,16 @@ TODO - what is the default lifetime of a token
 
 ### Server Responded with Error
 
-Server responds with 400
+Server responds with 400 and includes the following content
 
-| Field                 | Description |
-|-----------------------|-------------|
-| `error` |             |
-| `error_description`   |             |
+| Field                 | Description                   |
+|-----------------------|-------------------------------|
+| `error`               |  an error code. see below     |
+| `error_description`   |  a human readable description |
 
 error is assigned one of the following strings
 
-| Error             |
+| Error Code        |
 |-------------------|
 | `invalid_request` |
 | `invalid_client`  |
@@ -256,4 +256,10 @@ Mastodon does not supply the optional `error_uri` parameter.
 
 # Refreshing an Access Token
 
+It appears Mastodon no loner uses refresh token for apps authorized using the Authorization Code grant type.
 
+# Accessing a Resource Using an Access Token
+
+# Security
+
+See the specification and the specification reference for details
