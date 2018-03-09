@@ -207,7 +207,6 @@ xdg-open 'https://mastodon.social/oauth/authorize?response_type=code&redirect_ur
 # shutdown the python server
 ~~~
 
-use `open` in macOS instead of
 # Requesting an Access Token
 
 Use Mastodon's RESTful API to request an OAuth access token. The endpoint for token requests is: 
@@ -222,7 +221,7 @@ Your app must use POST to send the following data
 |-----------------|-------------|-------------------------|
 | `grant_type`    | YES         | must be `authorization_code`    |
 | `code`          | YES         | used to supply the authorization code |
-| `redirect_uri`  | MAYBE       | same as registration. See registration for details. |
+| `redirect_uri`  | YES         | same as registration. See registration for details. |
 | `client_id`     | YES         | obtained during registration. See registration for details. |
 | `client_secret` | YES         | obtained during registration. |
 
@@ -263,6 +262,9 @@ error is assigned one of the following strings
 | `invalid_scope`   |
 
 Mastodon does not supply an optional `error_uri` parameter.
+
+### Example
+
 
 # Refreshing an Access Token
 
