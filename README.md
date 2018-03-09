@@ -53,7 +53,7 @@ Your app must send a POST request with the following url-encoded data:
 |-----------------|-------------|-------------------------|
 | `client_name`   | YES         | The name of your app    |
 | `redirect_uris` | YES         | A URL your app has access to or `urn:ietf:wg:oauth:2.0:oob` URI. See details below |
-| `scopes`        | YES         | See details below          |
+| `scopes`        | NO          | See details below          |
 | `website`       | NO          | URL to your app's homepage |
 
 
@@ -100,7 +100,7 @@ Scopes are another one of those things left up to the server. Mastodon v2.2.0 ha
 * scopes are case-sensitive
 * order not relevant
 
-Mastodon does not provide default scopes during registration.
+On Mastodon, if omitted, defaults to `read`
 
 > Some resources require no authorization or scope. See Mastodon's API documentation
 
