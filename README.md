@@ -104,7 +104,7 @@ On Mastodon, if omitted, defaults to `read`
 
 > Some resources require no authorization or scope. See Mastodon's API documentation
 
-See OAUth spec section 3.3 for more about scopes
+See OAuth spec section 3.3 for more about scopes
 
 ### Registration Response
 
@@ -125,10 +125,10 @@ curl -X POST -d "client_name=example&redirect_uris=http%3A%2F%2Flocalhost%3A3000
 
 OAuth 2.0 utilizes two server end points:
 
-| Enpoint                   | Description | On Mastodon |
+| Endpoint                   | Description | On Mastodon |
 |---------------------------|-------------|-------------|
 | Authorization Endpoint    | Used by the app to obtain authorization from a user | `/oauth/authorize` |
-| Token Endpoint            | used by the app to exchange an authorization grant (e.g. authorization code) for an access token | `/ouath/token` |
+| Token Endpoint            | used by the app to exchange an authorization grant (e.g. authorization code) for an access token | `/oauth/token` |
 
 
 Again, the actual URL to these endpoints are left up to the server.
@@ -148,7 +148,7 @@ Your app must direct an external or internal web browser using the following url
 | `client_id`     | YES         | A string given to you during registration |
 | `redirect_uri`  | YES         | same as registration. For additional notes, see details below. |
 | `scope`         | SOMETIMES   | defaults to `read` if omitted, otherwise use any or all values used during registration. See registration for details. |
-| `state`         | NO          | recommended if combatting CSRF is necessary. see 10.12 |
+| `state`         | NO          | recommended if combating CSRF is necessary. see 10.12 |
 
 parameters with no values are ignored. Unrecognized parameters are ignored. Parameters must not be included more than once.
 
