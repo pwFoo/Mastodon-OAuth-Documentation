@@ -199,6 +199,25 @@ Mastodon does not supply an `error_uri` parameter.
 
 # Requesting an Access Token
 
+Use Mastodon's RESTful API to request an OAuth access token. The endpoint for token requests is: 
+
+~~~
+/oauth/token
+~~~
+
+Your app must use POST
+
+| Field           | Required?   | Description             |
+|-----------------|-------------|-------------------------|
+| `grant_type`    | YES         | `authorization_code`    |
+| `code`          | YES         |   |
+| `redirect_uri`  | MAYBE       | same as registration. See registration for details. |
+| `client_id`     | YES         | same as registration. See registration for details. |
+| `client_secret` | YES         |  |
+
+parameters with no values are ignored. Unrecognized parameters are ignored. Parameters must not be included more than once.
+
+### Server Responded with Access Token
 
 
 
