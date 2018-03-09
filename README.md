@@ -279,6 +279,8 @@ It appears Mastodon no longer uses a refresh token for apps authorized using the
 
 # Accessing a Resource Using an Access Token
 
+To access a protected resource, include an Authorization field in your header with its type set to `Bearer` and credentials set to the access token.
+
 ### Example
 ~~~
 curl --header "Authorization: Bearer ACCESS_TOKEN_HERE" -sS https://mastodon.social/api/v1/accounts/verify_credentials
