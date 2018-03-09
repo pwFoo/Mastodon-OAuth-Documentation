@@ -110,6 +110,12 @@ See OAUth spec section 3.3 for more about scopes
 | `client_id`    | public information used to identify your app during authorization. |
 | `client_secret`| confidential information used to identify your app when requesting a token. |
 
+### Example
+
+~~~
+curl -X POST -d "client_name=example&redirect_uris=http%3A%2F%2Flocalhost%3A3000&scopes=read%20write" -Ss https://mastodon.social/api/v1/apps
+~~~
+
 
 # Authorizing an App
 
