@@ -197,6 +197,17 @@ The value assigned to the error parameter may be one of the following
 
 Mastodon does not supply an optional `error_uri` parameter.
 
+### Example
+
+~~~
+python3 -m http.server 3000 -b 127.0.0.1 &
+#on linux use the xdg-open command. on macOS used open command instead.
+xdg-open 'https://mastodon.social/oauth/authorize?response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A3000&scope=read%20write&client_id=YOUR_CLIENT_ID_HERE'
+# the python http server prints all GET request
+# shutdown the python server
+~~~
+
+use `open` in macOS instead of
 # Requesting an Access Token
 
 Use Mastodon's RESTful API to request an OAuth access token. The endpoint for token requests is: 
