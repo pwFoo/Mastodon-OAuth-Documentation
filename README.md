@@ -81,7 +81,7 @@ or
 > when the redirection request will result in the transmission of
 > sensitive credentials over an open network."
 
-Note care should also be taken when copying code to a shared clipboard.
+Note: care should also be taken when copying code to a shared clipboard.
 
 
 ### scopes
@@ -163,7 +163,7 @@ TLS is recommended if the GET request made by the web browser for the URL travel
 
 > Mastodon uses [Doorkeeper](https://github.com/doorkeeper-gem/doorkeeper/wiki) to provide its OAuth 2.0 features. The Doorkeeper documentation can be a helpful companion.
 
-See Registration section above for further details.
+See Registering an App section above for further details.
 
 ### Authorization Response
 
@@ -279,7 +279,7 @@ It appears Mastodon no longer uses a refresh token for apps authorized using the
 
 # Accessing a Resource Using an Access Token
 
-To access a protected resource, include an Authorization field in your header with its type set to `Bearer` and credentials set to the access token.
+To access a protected resource, include an Authorization field in your header with its type set to `Bearer` and credentials set to your access token.
 
 ### Example
 ~~~
