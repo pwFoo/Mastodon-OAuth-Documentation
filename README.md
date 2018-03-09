@@ -79,7 +79,6 @@ or
 
 Note care should also be taken when copying code to a shared clipboard.
 
-TODO - can multiple URIs be registered? if so, how? space delimited?
 
 ### scopes
 
@@ -143,9 +142,6 @@ Your app must direct an external or internal web browser using the following url
 
 parameters with no values are ignored. Unrecognized parameters are ignored. Parameters must not be included more than once.
 
-TODO - Servers may support POST request. Does Mastodon?
-TODO - can redirect be opt as described in 3.1.2
-TODO - must scope be the same
 
 ### redirect_uri
 
@@ -177,8 +173,6 @@ Your app must not reuse one. Reusing an authorization code will cause the server
 
 An authorization code is also associated with a client ID and redirect URI.
 
-TODO - how long do auth code last
-TODO - does server revoke tokens prev assigned based on reused auth code
 
 ### Server Responded with an Error
 
@@ -230,7 +224,6 @@ The following parameters are included in the body of the HTTP response using the
 
 The following optional parameters are not included: `expires_in` and `refresh_token`. When `expires_in` is omitted the server should provide the expiration time via other means or document the default value.
 
-TODO - what is the default lifetime of a token
 
 ### Server Responded with an Error
 
@@ -262,4 +255,4 @@ It appears Mastodon no longer uses a refresh token for apps authorized using the
 
 # Security
 
-See the specification and the its references for details
+See the specification and its references for details
