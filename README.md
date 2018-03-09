@@ -186,14 +186,14 @@ If the user or server denied your request, or an error occurred, the web browser
 
 The value assigned to the error parameter may be one of the following
 
-| Error           |
-|-----------------|
-| invalid_request |
-| unauthorized_client |
-| access_denied |
-| invalid_scope |
-| server_error  |
-| temporarily_unavailable |
+| Error             |
+|-------------------|
+| `invalid_request` |
+| `unauthorized_client` |
+| `access_denied`   |
+| `invalid_scope`   |
+| `server_error`    |
+| `temporarily_unavailable` |
 
 Mastodon does not supply an `error_uri` parameter.
 
@@ -219,5 +219,41 @@ parameters with no values are ignored. Unrecognized parameters are ignored. Para
 
 ### Server Responded with Access Token
 
+The following parameters included in the body of the HTTP response using the application/json media type.
+
+| Field          | Description |
+|----------------|-------------|
+| `access_token` |             |
+| `token_type`   |             |
+| `scope`        | scope of the issued token. may differ from the one requested during authorization. optional if identical but always included in Mastodon |
+| `created_at`   |  app must ignore unknown value names in the response |           |
+
+The following optional parameters are not included: `expires_in` and `refresh_token`. When `expires_in` is omitted the server should provide the expiration time via other means or document the default value.
+
+TODO - what is the default lifetime of a token
+
+### Server Responded with Error
+
+Server responds with 400
+
+| Field                 | Description |
+|-----------------------|-------------|
+| `error` |             |
+| `error_description`   |             |
+
+error is assigned one of the following strings
+
+| Error             |
+|-------------------|
+| `invalid_request` |
+| `invalid_client`  |
+| `invalid_grant`   |
+| `unauthorized_client` |
+| `unsupported_grant_type`   |
+| `invalid_scope`   |
+
+Mastodon does not supply the optional `error_uri` parameter.
+
+# Refreshing an Access Token
 
 
