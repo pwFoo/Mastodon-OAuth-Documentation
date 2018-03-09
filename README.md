@@ -142,7 +142,7 @@ Your app must direct an external or internal web browser using the following url
 |-----------------|-------------|-------------------------|
 | `response_type` | YES         | `code` for Authorization Code grant type  |
 | `client_id`     | YES         | A string given to you during registration |
-| `redirect_uri`  | MAYBE       | same as registration. For additional notes, see details below. |
+| `redirect_uri`  | YES         | same as registration. For additional notes, see details below. |
 | `scope`         | YES         | same as registration. See registration for details. |
 | `state`         | NO          | recommended if combatting CSRF is necessary. see 10.12 |
 
