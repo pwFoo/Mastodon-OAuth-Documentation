@@ -53,6 +53,8 @@ Your app must send a POST request with the following urlencoded data:
 | `website`       | NO          | URL to your app's homepage |
 
 
+Server returns JSON data. See Registration Response below.
+
 ### redirect_uris
 
 Same URL you will use during the authorization step below. We register it here for security reason (section 10.0).
@@ -72,8 +74,12 @@ or,
 2. Set this to `urn:ietf:wg:oauth:2.0:oob` if no URL should be set. Mastodon will present the user with the authorization code that the user can copy and paste into your app.
 
 > "The redirection endpoint SHOULD require the use of TLS ...
-> ... when the redirection request will result in the transmission of
+> when the redirection request will result in the transmission of
 > sensitive credentials over an open network."
+
+Note care should be taken when copying code to a shared clipboard.
+
+TODO - can multiple URIs be registered? if so, how? space delimited?
 
 ### scopes
 
@@ -97,7 +103,61 @@ Mastodon does not provide default scopes
 
 See OAUth spec section 3.3 for scopes
 
+### Registration Response
+
+| Field          | Description |
+|----------------|-------------|
+| `id`           |             |
+| `client_id`    | used to identify your app during authorization. not confidential |
+| `client_secret`| needed in future request. confidential |
+
+
 # Authorization
+
+OAuth 2.0 utilizes two server end points:
+
+| Enpoint                   | Description | On Mastodon |
+|---------------------------|-------------|-------------|
+| Authorization Endpoint    | Used by the app to obtain authorization from a user | `/oauth/authorize` |
+| Token Endpoint            | used by the app to exchange an authorization grant (e.g. authorization code) for an access token | `/ouath/token` |
+
+
+Again, the actual URL to these endpoints are left up to the server.
+
+
+Use Mastodon's RESTful API to authorize apps. The endpoint for app authorization is: 
+
+~~~
+/oauth/authorize
+~~~
+
+Your app must send a GET request with the following urlencoded data:
+
+| Field           | Required?   | Description             |
+|-----------------|-------------|-------------------------|
+| `response_type` | YES         | `code` for Authorization Code grant type  |
+| `client_id`     | YES         | A string given to you during registration |
+| `redirect_uri`  | MAYBE       | same as registration. For additional notes, see details below. |
+| `scope`         | YES         | same as registration. See registration for details. |
+| `state`         | NO          | recommended if combatting CSRF is necessary. see 10.12 |
+
+parameters with no values are ignored. Unrecognized parameters are ignored. Parameters must not be included more than once.
+
+TODO - Servers may support POST request. Does Mastodon?
+TODO - can redirect be opt as described in 3.1.2
+TODO - must scope be the same
+
+### redirect_uri
+
+If invalid, or mismatched, request will fail.
+
+The app should not include any untrusted 3rd party scripts in the URL because any script included in the HTML document will execute with full access to the URI
+
+TLS is recommended if the GET request made by the web browser for the URL travels across an insecure or open network.
+
+> Mastodon uses [Doorkeeper](https://github.com/doorkeeper-gem/doorkeeper/wiki) to provide OAuth 2.0 features. As a result Doorkeeper's documentation can be a helpful companion.
+
+See Registration section above for more details.
 
 
 
