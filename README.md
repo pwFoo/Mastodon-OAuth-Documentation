@@ -31,7 +31,7 @@ There are four ways to authorize an app.
 
 In this documentation we only cover the first: Authorization Code
 
-# Registration
+# Registrating an App
 
 > "The means through which the client registers
 > with the authorization server are beyond the scope of this
@@ -112,7 +112,7 @@ See OAUth spec section 3.3 for scopes
 | `client_secret`| needed in future request. confidential |
 
 
-# Authorization
+# Authorizing an App
 
 OAuth 2.0 utilizes two server end points:
 
@@ -131,7 +131,7 @@ Use Mastodon's RESTful API to authorize apps. The endpoint for app authorization
 /oauth/authorize
 ~~~
 
-Your app must send a GET request with the following urlencoded data:
+Your app must direct an external or internal web browser with the following urlencoded query parameters:
 
 | Field           | Required?   | Description             |
 |-----------------|-------------|-------------------------|
@@ -158,6 +158,46 @@ TLS is recommended if the GET request made by the web browser for the URL travel
 > Mastodon uses [Doorkeeper](https://github.com/doorkeeper-gem/doorkeeper/wiki) to provide OAuth 2.0 features. As a result Doorkeeper's documentation can be a helpful companion.
 
 See Registration section above for more details.
+
+### Authorization Response
+
+At this point, the web browser will direct the user to a page on the Mastodon server to authorize your app. If the user is not currently signed in, the user will be asked to sign in. Your app must be registered with that server.
+
+If your request is granted, the server will:
+
+1. direct the web browser to the URL you gave it, adding a `code` query parameter. A `state` parameter will be included if one was included in the request.
+
+2. or if `urn:ietf:wg:oauth:2.0:oob` was given, to a page with the authorization code where the user can copy it.
+
+### Server Responded with Authorization Code
+
+OAuth requires the Authorization Code to expire. It recommends 10 minutes. 
+
+Your app must not reuse one. Reusing an authorization code will cause the server to deny your request, but could also cause the server to revoke tokens previously issued based on that authorization code.
+
+An authorization code is also associated with a client ID and redirect URI.
+
+TODO - how long do auth code last
+TODO - does server revoke tokens prev assigned based on reused auth code
+
+### Server Responded with Error
+
+If the user or server denied your request, or an error occurred, the web browser is set to the URL you gave it with `error` and `error_description` parameters added. A `state` parameter will be included if one was included in the request.
+
+The value assigned to the error parameter may be one of the following
+
+| Error           |
+|-----------------|
+| invalid_request |
+| unauthorized_client |
+| access_denied |
+| invalid_scope |
+| server_error  |
+| temporarily_unavailable |
+
+Mastodon does not supply an `error_uri` parameter.
+
+# Requesting an Access Token
 
 
 
